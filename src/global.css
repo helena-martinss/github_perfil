@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: "DM sans", 'sans-serif';
 }
 
 .container {
@@ -13,5 +13,52 @@
 
 :root {
     --corPrincipal: #ba87cc;
-    --corSecundaria: #111;
+    --corSecundaria: #9c36c2;
+}
+
+.container-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0;
+    background-color: var(--corPrincipal);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.container-input-botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px 0;
+}
+
+input {
+    outline: none;
+}
+
+input:focus {
+    box-shadow: 0 0 5px var(--corSecundaria);
+}
+
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: var(--corSecundaria);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+input, button {
+    height: 2.5rem;
+    font-size: 1rem;
+    padding: 8px;
+    border: 1px solid var(--corSecundaria);
+    background-color: #e2c0ee;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }

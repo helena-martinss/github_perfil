@@ -5,10 +5,19 @@ const ReposList = ({ nomeUsuario }) => {
 
     const [repos, setRepos] = useState([]);
     const [estaCarregando, setEstaCarregando] = useState(true);
+    const [deuErro, setDeuErro] = useState(false);
 
     useEffect(() => {
+        setDeuErro(false)
         setEstaCarregando(true);
         fetch(`https://api.github.com/users/${nomeUsuario}/repos`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Usuário não encontrado!")
+            } else {
+                return res;
+            }
+        })
         .then(res => res.json())
         .then(resJson => {
             setTimeout(() => {
@@ -16,12 +25,18 @@ const ReposList = ({ nomeUsuario }) => {
                 setRepos(resJson);
             }, 3000);
         })
+        .catch(e => {
+            setDeuErro(true);
+            setEstaCarregando(false);
+        })
     }, [nomeUsuario]);
 
     return (
         <div className="container">
             {estaCarregando ? (
                 <h1>Carregando...</h1>
+            ) : deuErro ? (
+                <h3>Este nome de usuário não existe</h3>
             ) : (
                 <ul className={styles.list}>
                     {repos.map(({ id, name, language, html_url }) => (
